@@ -1,4 +1,4 @@
-var extractTags = function(html, tag, startTag){
+var extractTags = function(link, html, tag, startTag){
     var allTags = [];
    
     function extract(html, tag, startTag,endTag){
@@ -33,7 +33,22 @@ var extractTags = function(html, tag, startTag){
         return {startTag: startTag,endTag: endTag};
     }
     
+    function verifyImages(link){
+        allTags = allTags.map(function(img){
+            if(img.search('http')=== -1){
+                var positionStart = img.search('src="') + 'src="'.length;
+                img = img.substring(0, positionStart) + link + '/' + img.substring(positionStart);
+            }
+            return img;
+        });
+    }
+
     extract(html, tag, startTag)
+
+    if(tag === 'img'){
+        verifyImages(link);
+    }
+
     return allTags.join('');
 }
 module.exports = extractTags;

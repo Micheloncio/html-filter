@@ -24,7 +24,7 @@ fs.readFile('link.txt', 'utf-8', (err, link) => {
 	const request = require('request')
 	
 	request(inputLink || link, (error, response, html) => {
-		const extract = extractTags(html,inputTag)
+		const extract = extractTags(inputLink || link, html,inputTag)
 		console.log(extract)
 		if(inputOption.outputFile){
 			fs.writeFile(inputOption.outputFile, extract, err => {
