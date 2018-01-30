@@ -34,6 +34,6 @@ var extractTags = function(html, tag, startTag){
     }
     
     extract(html, tag, startTag)
-    return allTags;
+    return allTags.join('');
 }
 module.exports = extractTags;
