@@ -25,13 +25,17 @@ fs.readFile('link.txt', 'utf-8', (err, link) => {
 	
 	request(inputLink || link, (error, response, html) => {
 		const extract = extractTags(inputLink || link, html,inputTag)
-		console.log(extract)
-		if(inputOption.outputFile){
-			fs.writeFile(inputOption.outputFile, extract, err => {
-				if (err) throw err
+		if(extract){
+			console.log(extract)
+			if(inputOption.outputFile){
+				fs.writeFile(inputOption.outputFile, extract, err => {
+					if (err) throw err
 
-				console.log(`saved in ${inputOption.outputFile}`)
-			})
+					console.log(`Saved in ${inputOption.outputFile}`)
+				})
+			}
+		}else{
+			console.log('Nothing to show...')
 		}
 	})
 })
