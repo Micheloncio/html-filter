@@ -39,6 +39,7 @@ var extractTags = function(link, html, tag, startTag){
                 var positionStart = img.search('src="') + 'src="'.length;
                 img = img.substring(0, positionStart) + link + '/' + img.substring(positionStart);
             }
+            
             return img;
         });
     }
@@ -49,6 +50,6 @@ var extractTags = function(link, html, tag, startTag){
         verifyImages(link);
     }
 
-    return allTags.join('');
+    return {tags: allTags.join(''), count: allTags.length};
 }
 module.exports = extractTags;

@@ -26,9 +26,10 @@ fs.readFile('link.txt', 'utf-8', (err, link) => {
 	request(inputLink || link, (error, response, html) => {
 		const extract = extractTags(inputLink || link, html,inputTag)
 		if(extract){
-			console.log(extract)
+			console.log(extract.tags)
+			console.log(`Total ${inputTag} tags extracted: ${extract.count}`)
 			if(inputOption.outputFile){
-				fs.writeFile(inputOption.outputFile, extract, err => {
+				fs.writeFile(inputOption.outputFile, extract.tags, err => {
 					if (err) throw err
 
 					console.log(`Saved in ${inputOption.outputFile}`)
